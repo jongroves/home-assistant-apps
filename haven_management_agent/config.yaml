@@ -1,0 +1,30 @@
+name: "Haven Management Agent"
+description: "Structured, authenticated, and audited Home Assistant administration"
+version: "0.1.0"
+slug: "haven_management_agent"
+init: false
+startup: services
+boot: manual
+arch:
+  - amd64
+homeassistant: "2026.8.0"
+homeassistant_api: true
+hassio_api: true
+hassio_role: manager
+apparmor: true
+host_network: false
+ports:
+  8443/tcp: 9443
+ports_description:
+  8443/tcp: "Authenticated Haven management API"
+map:
+  - type: homeassistant_config
+    read_only: false
+    path: /homeassistant
+  - type: app_config
+    read_only: false
+    path: /agent-config
+options:
+  bootstrap_mode: true
+schema:
+  bootstrap_mode: bool
